@@ -1,0 +1,24 @@
+<script src="//cdn.webrtc-experiment.com/RTCMultiConnection.js"></script>
+<input type=file>
+<button id="openNewSessionButton">Open New Room</button>
+<script>
+var connection = new RTCMultiConnection();
+
+connection.session = {
+    data: true  // this line suggests that don't get/use audio/video; 
+                // only setup data connection
+};
+
+// setup signaling channel
+connection.connect();
+
+// open new session
+document.querySelector('#openNewSessionButton').onclick = function() {
+    connection.open();
+};
+
+// send single file or multiple files concurrently!
+document.querySelector('input[type=file]').onchange = function() {
+    connection.send( this.files[0] );
+};
+</script>
