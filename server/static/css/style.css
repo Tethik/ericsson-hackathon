@@ -1,0 +1,16 @@
+.container-narrow {
+    max-width: 800px;
+}
+.masthead {
+    margin-bottom: 30px;
+}
+#drop_zone {
+    border: 2px dashed #ddd;
+    padding: 20px;
+    height: 100px;
+    line-height: 60px;
+    font-size: 22px;
+    color: #ddd;
+    text-align: center;
+    margin: 20px 0;
+}
