@@ -1,4 +1,4 @@
-var username = "tethik" + Math.random()*10;
+
 
 var PingDom = {
 	
@@ -23,10 +23,16 @@ var PingDom = {
 			console.log(PingDom.sessions);
 			var a = $("<a></a>");
 			a.click(function() {
-				console.log("Downloading!!!" + session.sessionid);
 				connection.join(session.sessionid);
+				
+				//~ connection.onFileEnd = function(event) {
+					//~ connection.leave();
+				//~ }
 			});
-			$("#available-files").append($("<div></div>").append(a.append(session.sessionid)));
+			
+			if(session.userid != username) {
+				$("#available-files").append($("<div></div>").append(a.append(session.userid + ": " + session.sessionid)));
+			}
 		};
 		
 		connection.connect();
@@ -60,9 +66,5 @@ var PingDom = {
 			UploadRoom.upload(e.target.files[0]);
 			connection.send("Hosting: " + e.target.files[0]);
 		};
-	},
-	
-	ping: function(userid) {
-		
-	},
+	}
 }
