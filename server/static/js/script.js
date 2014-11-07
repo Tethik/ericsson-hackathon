@@ -5,8 +5,8 @@
     var files = evt.dataTransfer.files;
     for (var i = 0, f; f = files[i]; i++) {
       UploadRoom.upload(f);
-      var li = '<li><strong>' + f.name + '</strong> (' + (f.type || 'n/a') + ') - ' + f.size + ' bytes, last modified: ' + (f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a') + '</li>';
-      $('#active_uploads').append(li);
+      //~ var li = '<li><strong>' + f.name + '</strong> (' + (f.type || 'n/a') + ') - ' + f.size + ' bytes, last modified: ' + (f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a') + '</li>';
+      //~ $('#active_uploads').append(li);
     }
   }
 

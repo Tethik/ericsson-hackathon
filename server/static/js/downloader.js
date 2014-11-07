@@ -3,7 +3,7 @@ var Downloader = {
 	download: function(sessionid) {		
 		var connection = new RTCMultiConnection("tethik");
 		connection.userid = username+"dl"+Math.random();
-		connection.session = {}; 
+		connection.session = { data: true }; 
 		connection.log = false;		
 		connection.autoSaveToDisk = false;
 		
@@ -19,11 +19,11 @@ var Downloader = {
 		
 		connection.onFileProgress = function (chunk, uuid) {
 			console.log("File progress triggered.");
-			//~ console.log(JSON.stringify(chunk));
+			console.log(JSON.stringify(chunk));
 			//~ console.log(JSON.stringify(uuid));
-			var perc = 100.0 * chunk.maxChunks / chunk.currentPosition;
+			var perc = 100.0 * chunk.currentPosition / chunk.maxChunks;
 			$("#download-body > progress").attr('value', perc);
-			$("#download-body > label").text(perc + "%");
+			$("#download-body > label").text(perc.toFixed(2) + "%");
 			//~ Downloader.updateLabel($("#download-body > progress"), $("#download-body > label"));
 		};
 					
@@ -36,6 +36,7 @@ var Downloader = {
 			console.log($("#download-a"));
 			$("#download-a").attr('href', file.url);
 			$("#download-a").attr('download', file.name);
+			connection.leave();
 			connection.disconnect();
 		};
 		
