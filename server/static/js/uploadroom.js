@@ -4,9 +4,12 @@ var UploadRoom = {
 	connections: [],
 
 	upload: function(file) {
-		connection = new RTCMultiConnection("tethik");
-		connection.userid = username;
+		var connection = new RTCMultiConnection("tethik");
+		connection.log = false;
+		connection.userid = username; //+"up"+Math.random();
 		connection.session = {
+			audio: false,
+			video: false,
 			data: true  // this line suggests that don't get/use audio/video;
 						// only setup data connection
 		};

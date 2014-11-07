@@ -14,6 +14,27 @@
   </head>
 
   <body>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		  </div>
+		  <div class="modal-body" id="download-body">
+			<label>0%</label> <progress max="100" value="0"></progress>
+			
+			<div id="download-finished">
+				<h4>Download finished.</h4>
+				<a id="download-a">Press to save</a>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
 
     <div class="container container-narrow">
 
@@ -46,6 +67,7 @@
     <script src="{% static "js/bootstrap.js" %}"></script>
     <script src="{% static "js/RTCMultiConnection.js" %}"></script>
     <script src="{% static "js/uploadroom.js" %}"></script>
+    <script src="{% static "js/downloader.js" %}"></script>
     <script src="{% static "js/comms.js" %}"></script>
     <script src="{% static "js/script.js" %}"></script>
     <script>

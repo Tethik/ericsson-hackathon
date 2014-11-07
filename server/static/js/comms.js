@@ -1,4 +1,5 @@
 
+window.skipRTCMultiConnectionLogs = true;
 
 var PingDom = {
 	
@@ -7,12 +8,9 @@ var PingDom = {
 
 	
 	init: function() {
-		connection = new RTCMultiConnection("tethik");
-
-		connection.session = {
-			data: true  // this line suggests that don't get/use audio/video; 
-						// only setup data connection
-		};
+		var connection = new RTCMultiConnection("tethik");
+		connection.log = false;
+		connection.session = {};
 		
 		connection.userid = username;
 		
@@ -23,16 +21,20 @@ var PingDom = {
 			console.log(PingDom.sessions);
 			var a = $("<a></a>");
 			a.click(function() {
-				connection.join(session.sessionid);
-				
-				//~ connection.onFileEnd = function(event) {
-					//~ connection.leave();
-				//~ }
+				Downloader.download(session.sessionid);
 			});
 			
 			if(session.userid != username) {
 				$("#active_downloads").append($("<li></li>").append(a.append(session.userid + ": " + session.sessionid)));
 			}
+		};
+		
+		connection.onSessionClosed = function(session) {
+			console.log(JSON.stringify(session));
+		};
+		
+		connection.onFileStart = function(event) {
+			console.log("File start triggered!");
 		};
 		
 		connection.connect();
@@ -43,11 +45,6 @@ var PingDom = {
 		
 		connection.onopen = function(event) {
 			console.log(event.userid + "connected");
-			//$("#chat").text($("#chat").text() + "\n<b>" + event.userid + " connected.</b>");
 		}
-
-		connection.onmessage = function(event) {
-			//$("#chat").text($("#chat").text() + "\n" + event.data);
-		};
 	}
 }
